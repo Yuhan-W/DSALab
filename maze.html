@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Maze Game</title>
+		<meta charset="utf-8" />
+		<script src="assets/js/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<script src="highlight.min.js"></script>
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="github-dark.min.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+		<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Home</span>
+								</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Gradeds Analysis</a></li>
+							<li><a href="tree.html">AVL Tree</a></li>
+							<li><a href="maze.html">Maze Game</a></li>
+							<li><a href="Joseph.html">Joseph Ring</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Lab 13: Maze Game</h1>
+								<!-- Prepare a DOM with a defined width and height for ECharts -->
+                                <h2>Description</h2>
+								<p>The maze is set by a 2d array of m rows and n columns, with 0 indicating accessibility 
+									and 1 indicating obstacles. The entrance is set to (1, 1) and the exit is set to (m, n).
+									Desingn a program to find the paths from the entrance to the exit, or to conclude that there is no path.</p> 
+								<p><b>Input</b></p>
+								<p>Two numbers, m and n, representing the size of the maze.</p>
+								<p><b>Output</b></p>
+								<p>The paths from the entrance to the exit or "impossible" when there is no path from the 
+									entrance to the exit.</p>
+								<script>
+									hljs.initHighlightingOnLoad();
+								</script>
+								<h2>Source</h2>
+								<div style="width:75%">
+								<pre>
+									<code class="c">
+#include &lt;stdio.h>
+#include &lt;string.h>
+/* Max size */
+#define N 20
+	
+/* Movement */
+int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+	
+/* Map and visit(boolean) */
+int g[N][N], vis[N][N];
+	
+/* path */ 
+int points[N*N][2];
+	
+int m, n;
+	
+int flag = 0;
+int k = 0;
+	
+/* Print feasible paths */
+void display()
+{
+	printf("(1, 1)->");
+	for (int i=0;i&lt;k-1;i++)
+		printf("(%d, %d)->", points[i][0], points[i][1]);
+	printf("(%d, %d)\n", m, n);
+}
+	
+/* DFS */ 
+void dfs(int a, int b)
+{
+	if (a==m&&b==n)
+	{
+		flag = 1;
+		display();
+		return;
+	}
+	else
+	{
+		for (int i=0;i&lt;4;i++)
+		{
+			int x = a + dx[i];
+			int y = b + dy[i];
+			if (x >= 1 && x<=m && y >=1 && y<=n && g[x][y]==0
+			    && !vis[x][y]) // Check validity 
+			{
+				points[k][0] = x;
+				points[k][1] = y;
+				k++;
+				vis[x][y] = 1;
+				// Recursion 
+				dfs(x, y);
+				// Go back
+				vis[x][y] = 0;
+				k--;
+			}
+		}
+	}
+}
+	
+int main(void)
+{
+	memset(vis, 0, sizeof(vis));
+	scanf("%d %d", &m, &n);
+	for (int i=1;i<=m;i++)
+	{
+		for (int j=1;j<=n;j++)
+			scanf("%d", &g[i][j]);
+	}
+	dfs(1, 1);
+	if (!flag) printf("Impossible");
+	return 0;
+}
+									</code>
+								</pre>
+							</div>
+							<h2>Results</h2>
+							<img alt="Possible"src="images/possible.jpg" width="800px">
+							<img alt="impossible" src="images/impossible.jpg" width="800px">
+							</div>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>

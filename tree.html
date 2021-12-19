@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Tree</title>
+		<meta charset="utf-8" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="highlight.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="github-dark.min.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+		<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Home</span>
+								</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Gradeds Analysis</a></li>
+							<li><a href="tree.html">AVL Tree</a></li>
+							<li><a href="maze.html">Maze Game</a></li>
+							<li><a href="Joseph.html">Joseph Ring</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Lab 7:Binary Search Tree and the AVL Tree</h1>
+                            <p>This a simple implementation of the binary search tree as well as the AVL tree in C++ and JavaScript.</p>
+							<script>
+								hljs.initHighlightingOnLoad();
+							</script>
+                            <h2>Binary Search Tree</h2>
+							<p>In computer science, a binary search tree (BST), also called an <b>ordered</b> or <b>sorted binary tree</b>,
+									 is a rooted binary tree data structure whose internal nodes each store a key greater than all the keys in the node's
+									  left subtree and less than those in its right subtree. A binary tree is a type of data structure for storing data such 
+									  as numbers in an organized way.</p>
+							<div class="fields">
+							<p><b>Class Definition</b></p>
+								<div style="width:75%">
+									<pre>
+										<code class="javascript">
+function Node(data, left, right) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+}
+
+function BST() {
+    this.root = null;
+    this.insert = insert;
+    this.inOrder = inOrder;
+    this.find = find;
+    this.remove = remove;
+    this.removeNode = removeNode;
+}
+										</code>
+									</pre>
+								</div>
+							<p><b>Insert</b></p>
+								<div style="width:75%;">
+									<pre>
+										<code class="javascript">
+function insert(data) {
+    var node = new Node(data, null, null);
+    if (this.root == null) {
+	    this.root = node;
+    }
+    else {
+	    var current = this.root;
+	    var parent;
+	    while (true) {
+		    parent = current;
+		    if (data < current.data) {
+			    current = current.left;
+			    if (current == null) {
+				    parent.left = node;
+				    break;
+			    }
+		    }
+		    else {
+			    current = current.right;
+			    if (current == null) {
+				    parent.right = node;
+				    break;
+			    }
+		    }	
+	    }
+    }
+}
+										</code>
+									</pre>
+								</div>
+										<p><b>Find</b></p>
+										<div style="width:75%;">
+											<pre>
+											<code class="javascript">
+											function inOrder(node) {
+												if (!(node == null)) {
+												inOrder(node.left);
+												console.log(node.data + " ");
+												inOrder(node.right);
+												}
+											}
+																	
+											</code>
+																						</pre>
+																						</div>
+										<p><b>Remove</b></p>
+										<div style="width:75%;">
+											<pre>
+											<code class="javascript">
+											function inOrder(node) {
+												if (!(node == null)) {
+												inOrder(node.left);
+												console.log(node.data + " ");
+												inOrder(node.right);
+												}
+											}
+																	
+											</code>
+											</pre>
+											</div>
+										<p><b>In-Order Traverse</b></p>
+										<div style="width:75%;">
+											<pre>
+												<code class="javascript">
+function inOrder(node) {
+	if (!(node == null)) {
+	    inOrder(node.left);
+	    console.log(node.data + " ");
+	    inOrder(node.right);
+	}
+}												
+												</code>
+											</pre>
+										</div>
+									</div>
+								<h2>AVL Tree</h2>
+								<p>In computer science, an AVL tree (named after inventors Adelson-Velsky and Landis) is a 
+									<b>self-balancing binary search tree</b>. It was the first such data structure to be invented. 
+									In an AVL tree, the heights of the two child subtrees of any node differ by <b>at most one</b>; if at any time 
+									they differ by more than one, rebalancing is done to restore this property.</p>
+								<div style="width:75%">
+									<pre>
+										<code class="javascript">
+// Node and AVL class
+function Node(data, left, right) {
+	this.data = data;
+	this.left = left;
+	this.right = right;
+}
+											 
+function AVL() {
+	this.root = null;
+	this.getBalanceFactor = getBalanceFactor;
+	this.getHeight = getHeight;
+	this.insert = insert;
+	this.inOrder = inOrder;
+}
+ 
+// calculate the balance factor 
+function getBalanceFactor(root) {
+    return this.getHeight(root.left) - this.getHeight(root.right);
+}
+  
+function getHeight(root) {
+    let height = 0;
+    if (root === null || typeof root == "undefined") {
+        height = -1;
+    } 
+	else {
+		height = Math.max(this.getHeight(root.left), this.getHeight(root.right)) + 1;
+	}
+	return height;
+}
+ 
+function insert(data) {
+	var node = new Node(data, null, null);
+	 // Check if the tree is empty
+	if (this.root === null) {
+	    this.root = node;
+		   // Insert as the first element this.root = node;
+	}
+	else {
+	   var current = this.root;
+	   var parent;
+	   while (true) {
+		  parent = current;
+		  if (data < current.data) {
+			 current = current.left;
+			 if (current == null) {
+				parent.left = node;
+				break;
+			 }
+		  }
+		  else {
+			 current = current.right;
+			 if (current == null) {
+				parent.right = node;
+				break;
+			 }
+		  }
+	   }
+	}  
+ }
+ 
+
+function inOrder() {
+	inOrderHelper(this.root);
+}
+ 
+ function insertHelper(root, node) {
+	if (root === null) {
+		root = node;
+	 } else if (node.data < root.data) {
+		// Go left!
+	   root.left = insertHelper(self, root.left, node);
+		// Check for balance factor and perform appropriate rotation
+	   if (root.left !== null && self.getBalanceFactor(root) > 1) {
+	   if (node.data > root.left.data) {
+		   root = rotationLL(root);
+	   } else {
+		   root = rotationLR(root);
+	   }
+	}
+  } else if (node.data > root.data) {
+	 // Go Right! root.
+	 right = insertHelper(self, root.right, node);
+	 // Check for balance factor and perform appropriate rotation
+	 if (root.right !== null && self.getBalanceFactor(root) < -1) {
+		if (node.data > root.right.data) {
+		   root = rotationRR(root);
+		} else {
+		   root = rotationRL(root);
+		}
+	 }
+  }
+  return root;
+  }
+ 
+ function inOrderHelper(root) {
+	 if (root !== null) {
+		inOrderHelper(root.left);
+		console.log(root.data);
+		inOrderHelper(root.right);
+	 }
+ }
+  
+ function rotationLL(node) {
+	 let tmp = node.left;
+	 node.left = tmp.right;
+	 tmp.right = node;
+	 return tmp;
+ }
+  
+ function rotationRR(node) {
+	 var tmp = node.right;
+	 node.right = tmp.left;
+	 tmp.left = node;
+	 return tmp;
+ }
+  
+ function rotationLR(node) {
+	node.left = rotationRR(node.left);
+	return rotationLL(node);
+ }
+  
+ function rotationRL(node) {
+	node.right = rotationLL(node.right);
+	return rotationRR(node);
+ }
+
+										</code>
+									</pre>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="avltree.js"></script>
+            <script src="BST.js"></script>
+	</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Grades Analysis</title>
+		<meta charset="utf-8" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="DATATABLE/Buttons-2.0.1/js/dataTables.buttons.js"></script>
+		<script type="text/javascript" src="DATATABLE/datatables.js"></script>
+		<script src="echarts.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="DATATABLE/datatables.css">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Home</span>
+								</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Gradeds Analysis</a></li>
+							<li><a href="tree.html">AVL Tree</a></li>
+							<li><a href="maze.html">Maze Game</a></li>
+							<li><a href="Joseph.html">Joseph Ring</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Lab 9:Grades Analysis</h1>
+							<!--
+							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>-->
+							<p>This is a simple platform designed for statistical analysis with respect to students' grades. Functions include 
+								<b>Sort</b>, <b>Average</b>, <b>Max</b>, <b>Min</b>, <b>Search</b>, <b>Output</b> and <b>Visualize</b>.</p>	
+								<ul>
+									<li><code>Sort</code>	By ascending order and descending order.</li>
+									<li><code>Average</code>	Calculate the average of the rows or columns.</li>
+									<li> <code>Max</code>	Find the maximum of the scores for each subject.</li>
+									<li> <code>Min</code>	Find the minimum of the scores for each subject.</li>
+									<li><code>Search</code>	Character-level search.</li>
+									<li>  <code>Export</code>	Copy or export the data in the foramt of excel.</li> 
+									<li><code>Visualize</code>	To illustrate the distribution of the data using echarts ,
+										 which is a powerful package for data visualzation.</li>	
+								</ul>				
+   							</table>
+							<div class="table-wrapper">
+								<table style="margin:0 auto;" id="table1" class="display">
+									<thead>
+										<tr class="input">
+											<th>ID</th>
+											<th>Name</th>
+											<th>Math</th>
+											<th>English</th>
+											<th>Computer</th>
+											<th>Average</th>
+										</tr>
+									</thead>
+									<tbody id="tbody1">
+										<tr>
+										    <td>001</td>
+											<td>Fang Wang</td>
+											<td>78</td>
+											<td>77</td>
+											<td>90</td>
+										</tr>
+										<tr>
+											<td>002</td>
+											<td>Qiang Zhang</td>
+											<td>89</td>
+											<td>67</td>
+											<td>88</td>
+										</tr>
+										<tr>
+											<td>003</td>
+											<td>Hao Li</td>
+											<td>56</td>
+											<td>66</td>
+											<td>78</td>
+											
+										</tr>
+										<tr>
+											<td>004</td>
+											<td>Pengbing Huang</td>
+											<td>89</td>
+											<td>86</td>
+											<td>85</td>
+											
+										</tr>
+										<tr>
+											<td>005</td>
+											<td>Hao Li</td>
+											<td>67</td>
+											<td>88</td>
+											<td>76</td>
+											
+										</tr>
+										<tr>
+											<td>006</td>
+											<td>Lifeng Chen</td>
+											<td>45</td>
+											<td>54</td>
+											<td>67</td>
+										</tr>
+										<tr>
+											<td>007</td>
+											<td>Xiao Shang</td>
+											<td>78</td>
+											<td>76</td>
+											<td>70</td>
+										</tr>
+									</tbody>
+									
+									<tfoot>
+										<tr>
+											<td>ID</td>
+											<td>Name</td>
+											<td>Math</td>
+											<td>English</td>
+											<td>Computer</td>
+											<td>Average</td>
+										</tr>
+										
+									</tfoot>
+								</table>
+								<br>
+								<h2>Statistics</h2>
+								<!-- Prepare a DOM with a defined width and height for ECharts -->
+							    <div id="he" style="width:860px;height:320px;margin:0 auto;"></div>
+							    <div id="ne" style="width:900px;height:400px;margin:0 auto;"></div>
+								<script>$(document).ready( function () {
+									$('#table1').DataTable({dom: 'Bfrtip',
+										buttons: ['copy', 'excel']
+									} );
+								} );</script>
+							</div>
+						</div>
+					</div>
+			</div>
+		<!-- Scripts -->
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="gradesanalysis.js"></script>
+	</body>
+</html>

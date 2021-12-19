@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Joseph Ring</title>
+		<meta charset="utf-8" />
+		<script src="assets/js/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="highlight.min.js"></script>
+		<link rel="stylesheet" href="github-dark.min.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+		<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Home</span>
+								</a>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Gradeds Analysis</a></li>
+							<li><a href="tree.html">AVL Tree</a></li>
+							<li><a href="maze.html">Maze Game</a></li>
+							<li><a href="Joseph.html">Joseph Ring</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Lab 5: Joseph Ring Simulation</h1>
+                                <p>A simulation of the classic Joseph ring problem using bidirectional recurrent linked list.</p>
+								<!-- Prepare a DOM with a defined width and height for ECharts -->
+                                <h2>Description</h2>
+								<p> Individuals sit in a clockwise circle, each holding a positive
+									 integer password. At the beginning, an upper limit of the number of reports is given at random, 
+									 starting from the first person in the clockwise direction from 1 onwards, stopping the number 
+									 when the number is reported to m, and the person who reports m is listed, and his password is 
+									 used as a new m value, and the number of reports from 1 is re-reported from the next person in 
+									 the clockwise direction; and so on until all are listed.
+								</p>
+								<p><b>Input</b></p>
+								<p>n:Number of people, val[n]:password</p>
+								<p><b>Output</b></p>
+								<p>The dequeue sequence.</p>
+									<script>
+										hljs.initHighlightingOnLoad();
+									</script>
+								<h2>source</h2>
+								<div style="width:75%">
+                                <pre>
+									<code class="c">
+
+#include &lt;stdio.h>
+#define N 100
+	
+/* Queue */
+int hh = 0, tt = -1; // head and tail
+int q[N];
+	
+void push(int a)
+{
+	q[++tt] = a;
+}
+	
+void pop()
+{
+	hh++;
+}
+	
+int empty()
+{
+	return (hh<=tt)? 0 : 1;
+}
+	
+int front()
+{
+	return q[hh];
+}
+	
+int main(void)
+{
+	int n, m, val[N]; // val stores the numbers
+	int now = 1; //  people counted 
+	int idx = 0; // current index of the val array
+	scanf("%d", &n);
+	scanf("%d", &m);
+
+	for (int i=0;i&lt;n;i++) 
+		scanf("%d", &val[i]);
+	for (int j=1;j<=n;j++)
+		push(j);
+	while (1)
+	{
+		if (now==m)
+		{
+			printf("%d ", front());
+			idx = front() - 1;
+			pop();
+			now = 1;
+			break;
+		}
+		else
+		{
+			push(front());
+			pop();
+			now++;
+		}
+	}
+	while (!empty())
+	{
+		if (now==val[idx])
+		{
+			printf("%d ", front());
+			idx = front() - 1;
+			pop();
+			now = 1;
+		}
+		else
+		{
+			push(front());
+			pop();
+			now++;
+		}
+	}
+	return 0;
+}
+									</code>
+								</pre>
+							</div>
+							<h2>Results</h2>
+							<img src="images/joe.jpg" width="800px">
+							</div>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>
