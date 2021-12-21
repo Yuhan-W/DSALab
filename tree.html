@@ -58,58 +58,118 @@
 							<p><b>Class Definition</b></p>
 								<div >
 									<pre>
-										<code class="javascript">
-function Node(data, left, right) {
-    this.data = data;
-    this.left = left;
-    this.right = right;
+										<code class="c">
+fun
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+	
+#define N 100
+	
+typedef struct node
+{
+	int data; 
+	struct node *left; 
+	struct node *right; 
+} Node, *tree;
+	
+/* search the value */
+tree search(tree root, int x)
+{
+	if(root==NULL || root->data==x) 
+		return root;
+	else if(x>root->data) 
+		return search(root->right, x);
+	else 
+		return search(root->left, x);
 }
-
-function BST() {
-    this.root = null;
-    this.insert = insert;
-    this.inOrder = inOrder;
-    this.find = find;
-    this.remove = remove;
-    this.removeNode = removeNode;
+	
+/* find the minimum value */
+tree find_minimum(tree root)
+{
+	if(root == NULL)
+		return NULL;
+	else if(root->left != NULL) 
+		return find_minimum(root->left); 
+	return root;
+}
+	
+/* create a new node */
+tree new_node(int x)
+{
+	tree p;
+	p = malloc(sizeof(Node));
+	p->data = x;
+	p->left = NULL;
+	p->right = NULL;
+	return p;
+}
+	
+tree insert(tree root, int x)
+{
+	//searching for the place to insert
+	if(root==NULL)
+		return new_node(x);
+	else if(x>root->data) 
+		root->right= insert(root->right, x);
+	else 
+		root->left = insert(root->left, x);
+	return root;
+}
+	
+/* remove a node */
+tree del(tree root, int x)
+{
+	//searching for the node to be removed
+	if(root==NULL)
+	{
+		printf("There is no %d in the tree!\n", x);
+		return NULL;
+	}
+	if (x>root->data)
+		root->right = del(root->right, x);
+	else if(x&lt;root->data)
+		root->left = del(root->left, x);
+	else
+	{
+		// No Children
+		if(root->left==NULL && root->right==NULL)
+		{
+			free(root);
+			return NULL;
+		}
+		// One Child
+		else if(root->left==NULL || root->right==NULL)
+		{
+			tree temp;
+			if(root->left==NULL)
+				temp = root->right;
+			else
+				temp = root->left;
+			free(root);
+			return temp;
+		}
+		// Two Children
+		else
+		{
+			tree temp = find_minimum(root->right);
+			root->data = temp->data;
+			root->right = del(root->right, temp->data);
+		}
+	}
+	return root;
+}
+	
+void inorder(tree root)
+{
+	if (root==NULL) return;
+	inorder(root->left); 
+	printf("%d ", root->data); 
+	inorder(root->right);
 }
 										</code>
 									</pre>
 								</div>
 							<p><b>Insert</b></p>
-								<div>
-									<pre>
-										<code class="javascript">
-function insert(data) {
-    var node = new Node(data, null, null);
-    if (this.root == null) {
-	    this.root = node;
-    }
-    else {
-	    var current = this.root;
-	    var parent;
-	    while (true) {
-		    parent = current;
-		    if (data < current.data) {
-			    current = current.left;
-			    if (current == null) {
-				    parent.left = node;
-				    break;
-			    }
-		    }
-		    else {
-			    current = current.right;
-			    if (current == null) {
-				    parent.right = node;
-				    break;
-			    }
-		    }	
-	    }
-    }
-}
-										</code>
-									</pre>
-								</div>
 									</div>
 								<h2>AVL Tree</h2>
 								<p>In computer science, an AVL tree (named after inventors Adelson-Velsky and Landis) is a 
