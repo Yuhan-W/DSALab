@@ -122,6 +122,9 @@ function removeNode(node, data) {
     }
 }
 
+function ASL() {
+
+}
 function userinput() {
     var input = document.getElementById('userin');
     var num = parseInt(input.value);
@@ -132,6 +135,8 @@ function userinput() {
         console.log(elem);
     }
 }
+
+
 
 function start() {
     //bst = new BST();
@@ -191,7 +196,7 @@ if (node!=null) {
     console.log('Found '+ x +' in the bst!');
     node = mybst.remove(node);
     console.log(mybst.root.data);
-    //console.log(mybst.root.left.data);
-    //console.log(mybst.root.right.data);
+    console.log(mybst.root.left.data);
+    console.log(mybst.root.left.right.data);
     mybst.inOrder(mybst.root);
 }
