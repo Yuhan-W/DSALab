@@ -49,21 +49,20 @@
 								<!-- Prepare a DOM with a defined width and height for ECharts -->
                                 <h2>Description</h2>
 								<p> Individuals sit in a clockwise circle, each holding a positive
-									 integer password. At the beginning, an upper limit of the number of reports is given at random, 
-									 starting from the first person in the clockwise direction from 1 onwards, stopping the number 
-									 when the number is reported to m, and the person who reports m is listed, and his password is 
-									 used as a new m value, and the number of reports from 1 is re-reported from the next person in 
-									 the clockwise direction; and so on until all are listed.
+									 integer password. At the beginning, an upper limit of the number of reports is given at random.
+									 The game starts from the first person in the clockwise direction, and stops
+									 when the number is reported to m. The person who reports leaves the circle, and his password is 
+									 used as a new m value. The game goes on until there are no people in the circle.
 								</p>
 								<p><b>Input</b></p>
-								<p>n:Number of people, val[n]:password</p>
+								<p>n:Number of people, val[n]:passwords</p>
 								<p><b>Output</b></p>
 								<p>The dequeue sequence.</p>
 									<script>
 										hljs.initHighlightingOnLoad();
 									</script>
 								<h2>source</h2>
-								<div style="width:75%">
+								<div>
                                 <pre>
 									<code class="c">
 
@@ -145,7 +144,7 @@ int main(void)
 								</pre>
 							</div>
 							<h2>Results</h2>
-							<img src="images/joe.jpg" width="800px">
+							<img src="images/jose.jpg" width="800px">
 							</div>
 						</div>
 					</div>
